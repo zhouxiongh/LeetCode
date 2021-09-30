@@ -17,8 +17,8 @@ class Solution:
         def dfs(root):
             if not root:
                 return 0
-            l = dfs(root.left) + 1 if root.left else dfs(root.left)
-            r = dfs(root.right) + 1 if root.right else dfs(root.right)
+            l = dfs(root.left) + 1 if root.left else 0
+            r = dfs(root.right) + 1 if root.right else 0
             self.depth = max(self.depth, l+r)
             return max(l, r)
         dfs(root)
