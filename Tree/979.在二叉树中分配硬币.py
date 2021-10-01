@@ -14,7 +14,7 @@
 class Solution:
     # balance = node.val - 1 + balance(node.left) + balance(node.right)
     # flow = abs(balance)
-    # ans = flow(root.left) + flow(root.right)
+    # ans = flow(node.left) + flow(node.right) + ans
     def distributeCoins(self, root: TreeNode) -> int:
         self.ans = 0
         def balance(root):
