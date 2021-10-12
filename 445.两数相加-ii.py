@@ -21,8 +21,9 @@ class Solution:
         # 进阶：如果输入链表不能修改该如何处理？
         # 换句话说，不能对列表中的节点进行翻转
         # use stack
-        s1 = []
-        s2 = []
+        import collections
+        s1 = collections.deque()
+        s2 = collections.deque()
         while l1:
             s1.append(l1.val)
             l1 = l1.next
