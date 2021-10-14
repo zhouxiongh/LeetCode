@@ -15,6 +15,7 @@ class Solution:
         # not overtime 
         # time complex O(lgn) 
         # space complex o(n)
+        import heapq
         if not lists:
             return None
         arr = []
@@ -22,13 +23,13 @@ class Solution:
             if not l:
                 continue
             while l:
-                arr.append(l.val)
+                heapq.heappush(arr, l.val)
                 l = l.next
-        arr.sort()
+        # arr.sort()
         ans = ListNode()
         head = ans
-        for n in arr:
-            node = ListNode(n)
+        while arr:
+            node = ListNode(heapq.heappop(arr))
             head.next = node
             head = head.next
         return ans.next
