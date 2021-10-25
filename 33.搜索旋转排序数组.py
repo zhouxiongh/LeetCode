@@ -14,6 +14,7 @@ class Solution:
             if target == nums[mid]:
                 return mid
             # 0 ... mid 有序
+            # mid 可能等于0
             if nums[0] <= nums[mid]:
                 if nums[0] <= target < nums[mid]:
                     r = mid - 1
