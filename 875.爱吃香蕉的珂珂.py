@@ -14,9 +14,7 @@ class Solution:
             speed = low_speed + (max_speed - low_speed) // 2
             eat_hours = 0
             for p in piles:
-                eat_hours += p // speed
-                if p % speed:
-                    eat_hours += 1
+                eat_hours += (p + speed - 1) // speed
             if eat_hours <= target_hours:
                 max_speed = speed
             else:
