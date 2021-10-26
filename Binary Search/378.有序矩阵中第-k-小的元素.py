@@ -21,7 +21,7 @@ class Solution:
         l = matrix[0][0]
         r = matrix[-1][-1]
         while l < r:
-            m = (r+l) // 2
+            m = l + (r-l) // 2
             if check(m):
                 r = m
             else:
