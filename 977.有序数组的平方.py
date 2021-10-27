@@ -11,6 +11,7 @@ class Solution:
         
         res = [None] * (j + 1)
         
+        # 从大到小
         for r in range(j, -1, -1):
             if abs(nums[i]) > abs(nums[j]):
                 res[r] = nums[i] ** 2
