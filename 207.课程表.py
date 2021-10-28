@@ -27,6 +27,7 @@ class Solution:
                     if dfs(t):
                         return True
             v[cur] = self.State.visited
+            # add cur node to topo node if needed
             return False
         
         def circle(start, curr, v):
