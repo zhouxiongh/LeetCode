@@ -20,11 +20,11 @@ class Solution:
             return: True 有环, False 无环
             """
             v[cur] = self.State.visiting
-            for t in graph_[cur]:
-                if v[t] == self.State.visiting:
+            for neighbour in graph_[cur]:
+                if v[neighbour] == self.State.visiting:
                     return True
-                elif v[t] == self.State.unvisited:
-                    if dfs(t):
+                elif v[neighbour] == self.State.unvisited:
+                    if dfs(neighbour):
                         return True
             v[cur] = self.State.visited
             # add cur node to topo node if needed
