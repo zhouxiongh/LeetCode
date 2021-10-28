@@ -53,7 +53,7 @@ class Solution:
         v = [self.State.unvisited] * numCourses
 
         for i in range(numCourses):
-            if v[i] != self.State.visited:
+            if v[i] == self.State.unvisited:
                 if dfs(i):
                     return False
         return True
