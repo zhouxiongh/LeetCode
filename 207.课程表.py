@@ -30,21 +30,6 @@ class Solution:
             # add cur node to topo node if needed
             return False
         
-        def circle(start, curr, v):
-            """
-            O(n2)
-            """
-            if start == curr and v[curr]:
-                return True
-            
-            for node in graph_[curr]:
-                if v[node]:
-                    continue
-                v[node] = True
-                if circle(start, node, v):
-                    return True
-            return False
-
         graph_ = [[] for j in range(numCourses)]
 
         for pre in prerequisites:
