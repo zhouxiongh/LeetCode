@@ -6,18 +6,27 @@
 
 # @lc code=start
 class Solution:
+    class State:
+        unkonwn = 0
+        visiting = 1
+        visited = 2
+
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         def dfs(cur, v):
-            if v[cur] == 1:
+            """
+            cur: current course index
+            v: states: 0 = unkonwn, 1 == visiting, 2 = visited
+            """
+            if v[cur] == self.State.visiting:
                 return True
-            if v[cur] == 2:
+            if v[cur] == self.State.visited:
                 return False
             
-            v[cur] = 1
+            v[cur] = self.State.visiting
             for t in graph_[cur]:
                 if dfs(t, v):
                     return True
-            v[cur] = 2
+            v[cur] = self.State.visited
             return False
 
         graph_ = [[] for j in range(numCourses)]
