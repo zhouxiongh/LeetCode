@@ -26,7 +26,8 @@ class UnionFindSet:
     
     def union(self, u, v):
         """
-        return: False if already union
+        return: bool
+        False if u, v already union
         """
         pu, pv = self.find(u), self.find(v)
         if pu == pv: return False
