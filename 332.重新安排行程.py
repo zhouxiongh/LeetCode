@@ -17,8 +17,8 @@ class Solution:
         trips_ = collections.defaultdict(list)
         route = []
 
-        for ticket in tickets:
-            trips_[ticket[0]].append(ticket[1])
+        for start, end in tickets:
+            trips_[start].append(end)
         
         for trip in trips_:
             heapq.heapify(trips_[trip])
