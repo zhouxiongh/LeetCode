@@ -8,23 +8,23 @@
 class Solution:
     def findItinerary(self, tickets: List[List[str]]) -> List[str]:
         def visit(start):
-            dests = trips_[start]
+            dests = trips[start]
             while dests:
-                dest = heapq.heappop(trips_[start])
+                dest = heapq.heappop(trips[start])
                 visit(dest)
-            route.append(start)
+            ans.append(start)
 
-        trips_ = collections.defaultdict(list)
-        route = []
+        trips = collections.defaultdict(list)
+        ans = []
 
-        for start, end in tickets:
-            trips_[start].append(end)
+        for start, dest in tickets:
+            trips[start].append(dest)
         
-        for trip in trips_:
-            heapq.heapify(trips_[trip])
+        for trip in trips:
+            heapq.heapify(trips[trip])
         
         kStart = 'JFK'
         visit(kStart)
-        return route[::-1]
+        return ans[::-1]
 # @lc code=end
 
