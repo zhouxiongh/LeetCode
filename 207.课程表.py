@@ -34,6 +34,7 @@ class Solution:
 
         for pre in prerequisites:
             graph_[pre[0]].append(pre[1])
+            # graph_[pre[1]].append(pre[0]) both works
         
         v = [self.State.unvisited] * numCourses
 
