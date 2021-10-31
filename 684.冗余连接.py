@@ -15,6 +15,7 @@ class Solution:
 
 class UnionFindSet:
     def __init__(self, n):
+        # start from 0
         self._parents = [i for i in range(n + 1)]
         self._ranks = [1 for i in range(n + 1)]
     
