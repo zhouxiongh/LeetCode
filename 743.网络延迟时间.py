@@ -9,7 +9,7 @@ class Solution:
     def networkDelayTime(self, times: List[List[int]], n: int, k: int) -> int:
         MAX_TIME = 101 * 100
         dist = [MAX_TIME] * n
-        dist[k - 1] = 0
+        dist[k - 1] = 0 # start form k
         for i in range(1, n):
             for time in times:
                 u, v, w = time[0] - 1 ,time[1] - 1, time[2]
