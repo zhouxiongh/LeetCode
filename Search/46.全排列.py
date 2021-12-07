@@ -30,3 +30,29 @@ s = Solution()
 output = s.permute(input_data)
 print(output)
 
+
+# version 2
+
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        def dfs(cur_depath, cur_ans, all_ans, depth):
+            if cur_depath == depth:
+                all_ans.append(cur_ans[:])
+                return
+            for i in range(depth):
+                if i in self.used:
+                    continue
+                self.used.add(i)
+                cur_ans.append(nums[i])
+                dfs(cur_depath+1, cur_ans, all_ans, depth)
+                cur_ans.pop()
+                self.used.remove(i)
+        self.used = set()
+        all_ans = []
+        cur_ans = []
+        n = len(nums)
+
+        dfs(0, cur_ans, all_ans, n)
+        return all_ans
+
+
