@@ -18,7 +18,7 @@ class Solution:
                 used[i] = True
                 cur_sum += sorted_nums[i]
                 if dfs(target, k, i, cur_sum):
-                    return True 
+                    return True
                 cur_sum -= sorted_nums[i]
                 used[i] = False
             return False
@@ -38,3 +38,26 @@ input4 = [4,3,2,3,5,2,1]
 # print(s.canPartitionKSubsets(input2, 5))
 # print(s.canPartitionKSubsets(input3, 2))
 print(s.canPartitionKSubsets(input4, 4))
+
+class Solution:
+    def canPartitionKSubsets(self, nums: List[int], k: int) -> bool:
+        def dfs(target, k, start=0, cur_sum=0):
+            if k == 0:
+                return True
+            if cur_sum == target:
+                return dfs(target, k-1)
+            for i in range(start, len(nums)):
+                if i in used: continue
+                used.add(i)
+                cur_sum += nums[i]
+                if dfs(target, k, i, cur_sum):
+                    return True
+                used.remove(i)
+                cur_sum -= nums[i]
+            return False
+
+        s = sum(nums)
+        used = set()
+        if s % k != 0:
+            return False
+        return dfs(s//k, k)
