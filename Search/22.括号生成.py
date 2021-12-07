@@ -24,8 +24,26 @@ class Solution:
                 dfs(l, r-1, cur)
                 cur = cur[:-1]
 
-            
+
         dfs(n, n, "")
         return ans
 # @lc code=end
 
+
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        def dfs(cur, ans, l, r, n):
+            if len(cur) == n*2:
+                ans.append(cur)
+                return
+            if l < n:
+                cur += '('
+                dfs(cur, ans, l+1, r, n)
+                cur = cur[:-1]      # pop out
+            if r < l:
+                cur += ')'
+                dfs(cur, ans, l, r+1, n)
+                cur = cur[:-1]      # pop out
+        ans = []
+        dfs('', ans, 0, 0, n)
+        return ans
