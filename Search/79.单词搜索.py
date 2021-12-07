@@ -31,3 +31,27 @@ class Solution:
         return False
 # @lc code=end
 
+class Solution:
+    def exist(self, board: List[List[str]], word: str) -> bool:
+
+        def dfs(row, col, depth, word):
+            if row < 0 or row >= row_size or col < 0 or col >= col_size:
+                return False
+            if word[depth] != board[row][col]:
+                return False
+            if depth == len(word) - 1:
+                return True
+            tmp = board[row][col]
+            board[row][col] = 0
+            ans = dfs(row+1, col, depth+1, word) or dfs(row-1, col, depth+1, word) \
+            or dfs(row, col+1, depth+1, word) or dfs(row, col-1, depth+1, word)
+            board[row][col] = tmp
+            return ans
+
+        row_size = len(board)
+        col_size = len(board[0])
+        for i in range(row_size):
+            for j in range(col_size):
+                if dfs(i, j, 0, word):
+                    return True
+        return False
