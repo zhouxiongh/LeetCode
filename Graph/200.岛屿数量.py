@@ -28,4 +28,24 @@ class Solution:
 
         return ans
 # @lc code=end
-
+class Solution:
+    def numIslands(self, grid: List[List[str]]) -> int:
+        def dfs(row, col):
+            if row < 0 or row >= row_size or col < 0 or col >= col_size:
+                return
+            if grid[row][col] == "0":
+                return
+            grid[row][col] = "0"
+            dfs(row-1, col)
+            dfs(row+1, col)
+            dfs(row, col-1)
+            dfs(row, col+1)
+        ans = 0
+        row_size = len(grid)
+        col_size = len(grid[0])
+        for i in range(row_size):
+            for j in range(col_size):
+                if grid[i][j] == "1":
+                    ans += 1
+                    dfs(i, j)
+        return ans
