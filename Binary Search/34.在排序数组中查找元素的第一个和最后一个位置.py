@@ -22,7 +22,7 @@ class Solution:
             if l == len(nums) or nums[l] != target:
                 return -1
             return l
-                
+
         def last_pos(nums, target):
             l = 0
             r = len(nums)
@@ -32,7 +32,7 @@ class Solution:
                     r = mid
                 # 大于或等于搜索范围向左逼近，找到最后一个位置
                 else:
-                    l = mid + 1 
+                    l = mid + 1
             # 结束循环时 nums[mid] >= target
             # mid + 1 是第一个大于且不等于target的位置
             l -= 1
@@ -40,6 +40,35 @@ class Solution:
                 return -1
             return l
         return [first_pos(nums, target), last_pos(nums, target)]
-        
+
 # @lc code=end
 
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        def first_pos(nums, target):
+            lo = 0
+            hi = len(nums)
+            while lo < hi:
+                mid = lo + (hi-lo) // 2
+                if nums[mid] >= target:
+                    hi = mid - 1
+                else:
+                    lo = mid
+            hi += 1
+            if hi == len(nums) or nums[hi] != target:
+                return -1
+            return hi
+        def last_pos(nums, target):
+            lo = 0
+            hi = len(nums)
+            while lo < hi:
+                mid = lo + (hi-lo) // 2
+                if nums[mid] <= target:
+                    lo = mid + 1
+                else:
+                    hi = mid
+            lo -= 1
+            if lo < 0 or nums[lo] != target:
+                return -1
+            return lo
+        return [first_pos(nums, target), last_pos(nums, target)]
