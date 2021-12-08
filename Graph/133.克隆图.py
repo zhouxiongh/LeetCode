@@ -31,6 +31,23 @@ class Solution:
                     queue.append(neighbor)
                 visited[n].neighbors.append(visited[neighbor])
         return visited[node]
-        
+
 # @lc code=end
 
+class Solution:
+    def cloneGraph(self, node: 'Node') -> 'Node':
+        if not node:
+            return node
+        visited = {}
+        visited[node] = Node(node.val, [])
+        queue = collections.deque([node])
+
+        while queue:
+            node = queue.popleft()
+            for neighbor in node.neighbors:
+                if neighbors not in visited:
+                    visited[neighbor] = Node(neighbor.val, [])
+                    queue.append(neighbor)
+                # add neibor node
+                visited[node].neighbors.append(visited[neighbor])
+        return visited[node]
