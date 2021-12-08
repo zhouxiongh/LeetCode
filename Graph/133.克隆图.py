@@ -43,11 +43,12 @@ class Solution:
         queue = collections.deque([node])
 
         while queue:
-            node = queue.popleft()
-            for neighbor in node.neighbors:
+            n = queue.popleft()
+            for neighbor in n.neighbors:
                 if neighbors not in visited:
                     visited[neighbor] = Node(neighbor.val, [])
                     queue.append(neighbor)
                 # add neibor node
-                visited[node].neighbors.append(visited[neighbor])
+                visited[n].neighbors.append(visited[neighbor])
         return visited[node]
+
