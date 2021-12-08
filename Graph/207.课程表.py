@@ -29,13 +29,13 @@ class Solution:
             v[cur] = self.State.visited
             # add cur node to topo node if needed
             return False
-        
+
         graph_ = [[] for j in range(numCourses)]
 
         for pre in prerequisites:
             graph_[pre[0]].append(pre[1])
             # graph_[pre[1]].append(pre[0]) both works
-        
+
         v = [self.State.unvisited] * numCourses
 
         for i in range(numCourses):
@@ -45,3 +45,28 @@ class Solution:
         return True
 # @lc code=end
 
+# version 2
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        def dfs(node : int):
+            """ if node has circle """
+            visited[node] = -1
+            for neighbour in graph_[node]:
+                if visited[neighbour] == -1:
+                    return True
+                elif visited[neighbour] == 0:
+                    if dfs(neighbour):
+                        return True
+
+            visited[node] = 1
+            return False
+
+        graph_ = [[] for i in range(numCourses)]
+        for post, pre in prerequisites:
+            graph_[post].append(pre)
+        visited = [0] * numCourses
+        for i in range(numCourses):
+            if visited[i] != 0:
+                if dfs(i):
+                    return False
+        return True
