@@ -4,7 +4,7 @@
 # [684] 冗余连接
 #
 
-# @lc code=start
+from typing import List
 class Solution:
     def findRedundantConnection(self, edges: List[List[int]]) -> List[int]:
         s = UnionFindSet(len(edges))
@@ -42,7 +42,6 @@ class UnionFindSet:
             self._ranks[pu] += 1
         
         return True
-# @lc code=end
 
 # second
 class UnionFindSet:
@@ -79,3 +78,37 @@ class Solution:
                 return edge
         return None
 
+# @lc code=start
+class Solution:
+    def findRedundantConnection(self, edges):
+        n = len(edges)
+        uf = UnionFindSet(n)
+        # build union find set
+        for edge in edges:
+            if uf.union(edge[0], edge[1]):
+                return edge
+        return None
+class UnionFindSet:
+    def __init__(self, n):
+        self._parents = [i for i in range(n+1)]
+        self._ranks = [1] * (n+1)
+
+    def union(self, u, v):
+        pu, pv = self.find(u), self.find(v)
+        if pu == pv:
+            return True
+        if self._ranks[pu] > self._ranks[pv]:
+            self._parents[pv] = pu
+            self._ranks[pu] += self._ranks[pv]
+        else:
+            self._parents[pu] = pv
+            self._ranks[pv] += self._ranks[pu]
+        return False
+
+    def find(self, u):
+        while u != self._parents[u]:
+            self._parents[u] = self._parents[self._parents[u]]
+            u = self._parents[u]
+        return u
+
+# @lc code=end
