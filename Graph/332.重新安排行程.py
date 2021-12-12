@@ -4,7 +4,6 @@
 # [332] 重新安排行程
 #
 
-# @lc code=start
 class Solution:
     def findItinerary(self, tickets: List[List[str]]) -> List[str]:
         def visit(start):
@@ -55,3 +54,28 @@ class Solution:
         visit(start_p)
         return ans[::-1]
 
+# version 3
+# @lc code=start
+class Solution:
+    def findItinerary(self, tickets: List[List[str]]) -> List[str]:
+        def visit(start):
+            dests = trips[start]
+            while dests:
+                dest = heapq.heappop(trips[start])
+                visit(dest)
+            route.append(start)
+        # build graph
+        trips = defaultdict(list)
+        route = []
+
+        for (start, dest) in tickets:
+            trips[start].append(dest)
+        
+        for trip in trips:
+            heapq.heapify(trips[trip]) 
+        
+        visit('JFK')
+        
+        return route[::-1]
+
+# @lc code=end
