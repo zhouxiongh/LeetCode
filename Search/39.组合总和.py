@@ -4,7 +4,6 @@
 # [39] 组合总和
 #
 
-# @lc code=start
 class Solution:
     def combinationSum(self, candidates, target):
         def dfs(candidates, target, start, curr, ans):
@@ -25,7 +24,6 @@ class Solution:
         dfs(candidates, target, 0, [], ans)
 
         return ans
-# @lc code=end
 
 # version 2
 class Solution:
@@ -47,15 +45,17 @@ class Solution:
         dfs(0, cur_ans, all_ans, target, candidates)
         return all_ans
 
-
-
-
-
-
-
-
-
-
-
-
+# @lc code=start
+# version 3
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        ans = list()
+        n = len(candidates)
+        max_size = target // min(candidates) + 1
+        for i in range(1, max_size):
+            for c in itertools.combinations_with_replacement(candidates, i):
+                if sum(c) == target:
+                    ans.append(c)
+        return ans
+# @lc code=end
 
