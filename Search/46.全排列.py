@@ -4,7 +4,6 @@
 # [46] 全排列
 #
 from typing import List
-# @lc code=start
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
         def dfs(depth, cur=[]):
@@ -24,7 +23,6 @@ class Solution:
         n = len(nums)
         dfs(0)
         return ans
-# @lc code=end
 input_data = [1,2,3]
 s = Solution()
 output = s.permute(input_data)
@@ -56,3 +54,9 @@ class Solution:
         return all_ans
 
 
+# @lc code=start
+class Solution:
+    def permute(self, nums: List[int]):
+        return list(itertools.permutations(nums))
+
+# @lc code=end
