@@ -4,7 +4,7 @@
 # [743] 网络延迟时间
 #
 
-# @lc code=start
+
 class Solution:
     def networkDelayTime(self, times: List[List[int]], n: int, k: int) -> int:
         MAX_TIME = 101 * 100
@@ -17,7 +17,6 @@ class Solution:
         max_dist = max(dist[1:])
         return -1 if max_dist == MAX_TIME else max_dist
 
-# @lc code=end
 
 # version 2
 
@@ -33,3 +32,16 @@ class Solution:
         max_dist = max(dist[1:])
         return -1 if max_dist == MAX_TIME else max_dist
 
+# @lc code=start
+class Solution:
+    def networkDelayTime(self, times, n, k):
+        MAX_TIME = 101 * 100
+        dist = [MAX_TIME] * n
+        dist[k-1] = 0
+        # why iter n times
+        for i in range(n):
+            for u, v, w in times:
+                dist[v-1] = min(dist[u-1] + w, dist[v-1])
+        max_dist = max(dist)
+        return -1 if max_dist == MAX_TIME else max_dist
+# @lc code=end
