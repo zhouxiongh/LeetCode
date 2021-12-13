@@ -38,8 +38,8 @@ class Solution:
         MAX_TIME = 101 * 100
         dist = [MAX_TIME] * n
         dist[k-1] = 0
-        # why iter n times
-        for i in range(n):
+        # why iter n-1 times
+        for i in range(1, n):
             for u, v, w in times:
                 dist[v-1] = min(dist[u-1] + w, dist[v-1])
         max_dist = max(dist)
