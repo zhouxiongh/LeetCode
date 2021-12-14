@@ -4,7 +4,6 @@
 # [79] 单词搜索
 #
 
-# @lc code=start
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
         def dfs(x, y, depth):
@@ -29,7 +28,6 @@ class Solution:
                 if dfs(i, j, 0):
                     return True
         return False
-# @lc code=end
 
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
@@ -55,3 +53,29 @@ class Solution:
                 if dfs(i, j, 0, word):
                     return True
         return False
+
+# @lc code=start
+class Solution:
+    def exist(self, board: List[List[str]], word: str) -> bool:
+        def dfs(row, col, depth, word):
+            if row < 0 or row >= row_size:
+                return False
+            if col < 0 or col >= col_size:
+                return False
+            if board[row][col] != word[depth]:
+                return False
+            if depth == len(word) - 1:
+                return True
+            tmp = board[row][col]
+            board[row][col] = 0
+            ans = dfs(row+1, col, depth+1, word) or dfs(row-1, col, depth+1, word) or dfs(row, col+1, depth+1, word) or dfs(row, col-1, depth+1, word)
+            board[row][col] = tmp
+            return ans
+        row_size = len(board)
+        col_size = len(board[0])
+        for i in range(row_size):
+            for j in range(col_size):
+                if dfs(i, j, 0, word):
+                    return True
+        return False
+# @lc code=end
