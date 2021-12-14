@@ -4,7 +4,6 @@
 # [698] 划分为k个相等的子集
 #
 from typing import List
-# @lc code=start
 class Solution:
     def canPartitionKSubsets(self, nums: List[int], k: int) -> bool:
         def dfs(target, k, cur=0, cur_sum=0):
@@ -28,7 +27,6 @@ class Solution:
         if s % k != 0:
             return False
         return dfs(s // k, k)
-# @lc code=end
 s = Solution()
 # input1 = [4,3,2,3,5,2,1]
 # input2 = [3522,181,521,515,304,123,2512,312,922,407,146,1932,4037,2646,3871,269]
@@ -61,3 +59,30 @@ class Solution:
         if s % k != 0:
             return False
         return dfs(s//k, k)
+
+# @lc code=start
+class Solution:
+    def canPartitionKSubsets(self, nums: List[int], k: int) -> bool:
+        def dfs(target, k, start=0, cur_sum=0):
+            if k == 0:
+                return True
+            if cur_sum == target:
+                return dfs(target, k-1)
+            for i in range(start, len(nums)):
+                if not used[i]:
+                    used[i] = True
+                    cur_sum += nums[i]
+                    if dfs(target, k, i, cur_sum):
+                        return True
+                    cur_sum -= nums[i]
+                    used[i] = False
+            return False
+
+            
+        s = sum(nums)
+        if s % k != 0:
+            return False
+        used = [False] * len(nums)
+        # nums.sort()
+        return dfs(s // k, k)
+# @lc code=end
