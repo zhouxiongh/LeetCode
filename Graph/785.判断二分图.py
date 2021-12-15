@@ -4,7 +4,6 @@
 # [785] 判断二分图
 #
 
-# @lc code=start
 # class Solution:
 #     class Color:
 #         red = 1
@@ -51,5 +50,25 @@ class Solution:
         return True
 
 
-# @lc code=end
+# @lc code=start
+class Solution:
+    RED = -1
+    GREEN = 1
 
+    def isBipartite(self, graph: List[List[int]]) -> bool:
+        n = len(graph)
+        colors = [0] * n
+        def coloring(node, color):
+            if colors[node] != 0:
+                return colors[node] == color
+            colors[node] = color
+            for n in graph[node]:
+                if not coloring(n, -color):
+                    return False
+            return True
+        for i in range(n):
+            if colors[i] == 0:
+                if not coloring(i, self.RED):
+                    return False
+        return True
+# @lc code=end
