@@ -4,7 +4,6 @@
 # [207] 课程表
 #
 
-# @lc code=start
 class Solution:
     class State:
         unvisited = 0
@@ -43,7 +42,6 @@ class Solution:
                 if dfs(i):
                     return False
         return True
-# @lc code=end
 
 # version 2
 class Solution:
@@ -70,3 +68,35 @@ class Solution:
                 if dfs(i):
                     return False
         return True
+
+
+# @lc code=start
+class Solution:
+    UNVISITED = 0
+    VISITED = 1
+    VISITING = 2
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]):
+        def dfs(course_num):
+            visited[course_num] = self.VISITING
+            for n in graph[course_num]:
+                if visited[n] == self.VISITED:
+                    continue
+                if visited[n] == self.VISITING:
+                    return True
+                if visited[n] == self.UNVISITED:
+                    if dfs(n):
+                        return True
+            visited[course_num] = self.VISITED
+            return False
+
+        visited = [0] * numCourses
+        graph = defaultdict(list)
+        for post, pre in prerequisites:
+            graph[post].append(pre)
+        
+        for i in range(numCourses):
+            if not visited[i]:
+                if dfs(i):
+                    return False
+        return True
+# @lc code=end
