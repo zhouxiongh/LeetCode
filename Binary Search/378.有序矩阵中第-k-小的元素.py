@@ -4,7 +4,7 @@
 # [378] 有序矩阵中第 K 小的元素
 #
 
-# @lc code=start
+
 class Solution:
     def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
         n = len(matrix)
@@ -61,3 +61,33 @@ class Solution:
                 l = mid + 1
 
         return l
+
+
+# @lc code=start
+class Solution:
+    def kthSmallest(self, matrix, k):
+        def check(val):
+            counter = 0
+            row = n - 1
+            col = 0
+            while col < n and row >= 0:
+                if val >= matrix[row][col]:
+                    counter += row + 1
+                    col += 1
+                else:
+                    row -= 1
+            return counter >= k
+
+        n = len(matrix)
+        lo = matrix[0][0]
+        hi = matrix[-1][-1]
+        while lo < hi:
+            mid = lo + (hi - lo) // 2
+            if check(mid):
+                hi = mid
+            else:
+                lo = mid + 1
+        return lo
+
+
+# @lc code=end
