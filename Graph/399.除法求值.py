@@ -5,7 +5,6 @@
 #
 from typing import List
 import collections
-# @lc code=start
 # class Solution:
 #     def calcEquation(self, equations: List[List[str]], values: List[float], queries: List[List[str]]) -> List[float]:
 #         def divide(x, y, visited):
@@ -64,9 +63,38 @@ class Solution:
         
         return ans
 
-# @lc code=end
 equations = [["a","b"],["b","c"]]
 values = [2.0,3.0]
 queries = [["a","c"],["b","a"],["a","e"],["a","a"],["x","x"]]
 ans = Solution().calcEquation(equations, values, queries)
 print(ans)
+
+# @lc code=start
+class Solution:
+    def calcEquation(self, equations, values, queries):
+        def divide(x, y, visited):
+            if x == y:
+                return 1.0
+            visited.add(x)
+            for n in graph[x]:
+                if n in visited:
+                    continue
+                visited.add(n)
+                ndy = divide(n, y, visited)
+                if ndy > 0:
+                    return ndy * graph[x][n]
+            return -1.0
+        graph = defaultdict(dict)
+        for (x, y), v in zip(equations, values):
+            graph[x][y] = v
+            graph[y][x] = 1.0 / v
+        
+        ans = []
+        for q_x, q_y in queries:
+            if q_x in graph and q_y in graph:
+                ans.append(divide(q_x, q_y, set()))
+            else:
+                ans.append(-1.0)
+        return ans
+
+# @lc code=end
