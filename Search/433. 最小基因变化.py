@@ -23,7 +23,7 @@ class Solution:
             size = len(queue)
             while size:
                 size -= 1
-                cur  = queue.popleft()
+                cur = queue.popleft()
                 if cur == end:
                     return ans
                 for b in bank:
@@ -32,8 +32,8 @@ class Solution:
                         visited.add(b)
             ans += 1
         return ans
-        
-            
+
+
 # @lc code=start
 class Solution:
     def minMutation(self, start, end, bank):
@@ -43,6 +43,7 @@ class Solution:
                 if c1 != c2:
                     counter += 1
             return counter == 1
+
         queue = deque()
         queue.append(start)
         visited = set()
@@ -60,5 +61,6 @@ class Solution:
                         visited.add(gene)
             ans += 1
         return -1
+
 
 # @lc code=end
