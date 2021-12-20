@@ -46,7 +46,6 @@ class Solution:
         dfs('', ans, 0, 0, n)
         return ans
 
-# @lc code=start
 class Solution:
     def generateParenthesis(self, n):
         def dfs(cur, ans, l=0, r=0):
@@ -62,5 +61,24 @@ class Solution:
                 cur = cur[:-1]
         ans = list()
         dfs('', ans)
+        return ans
+
+# @lc code=start
+class Solution:
+    def generateParenthesis(self, n):
+        ans = []
+        def dfs(cur="", left=0, right=0):
+            if len(cur) == 2 * n:
+                ans.append(cur)
+                return
+            if left < n:
+                cur += "("
+                dfs(cur, left+1, right)
+                cur = cur[:-1]
+            if right < left:
+                cur += ")"
+                dfs(cur, left, right+1)
+                cur = cur[:-1]
+        dfs()
         return ans
 # @lc code=end
