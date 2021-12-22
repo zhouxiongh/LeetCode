@@ -41,6 +41,7 @@ class Solution:
                 if coloring(neighbor, -color) == False:
                     return False
             return True
+
         n = len(graph)
         colors = [None] * n
         for i in range(n):
@@ -50,7 +51,6 @@ class Solution:
         return True
 
 
-# @lc code=start
 class Solution:
     RED = -1
     GREEN = 1
@@ -58,6 +58,7 @@ class Solution:
     def isBipartite(self, graph: List[List[int]]) -> bool:
         n = len(graph)
         colors = [0] * n
+
         def coloring(node, color):
             if colors[node] != 0:
                 return colors[node] == color
@@ -66,9 +67,35 @@ class Solution:
                 if not coloring(n, -color):
                     return False
             return True
+
         for i in range(n):
             if colors[i] == 0:
                 if not coloring(i, self.RED):
                     return False
         return True
+
+
+# @lc code=start
+class Solution:
+    def isBipartite(self, graph):
+        def dfs(node, color):
+            if colors[node]:
+                return colors[node] == color
+            colors[node] = color
+            for neighbor in graph[node]:
+                if not dfs(neighbor, -color):
+                    return False
+            return True
+
+        n = len(graph)
+        colors = [0] * n
+        RED = 1
+        GREEN = -1
+        for i in range(n):
+            if not colors[i]:
+                if not dfs(i, RED):
+                    return False
+        return True
+
+
 # @lc code=end
