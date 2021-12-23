@@ -105,7 +105,6 @@ class Solution:
         return ans
 
 
-# @lc code=start
 class Solution:
     def updateMatrix(self, mat):
         n = len(mat)
@@ -118,8 +117,42 @@ class Solution:
                     queue.append((i, j))
         while queue:
             row, col = queue.popleft()
-            for i, j in [(row+1, col), (row-1, col), (row, col+1), (row, col-1)]:
+            for i, j in [
+                (row + 1, col),
+                (row - 1, col),
+                (row, col + 1),
+                (row, col - 1),
+            ]:
                 if i in range(n) and j in range(col_size) and mat[i][j] != 0:
+                    mat[i][j] = 0
+                    new_mat[i][j] = new_mat[row][col] + 1
+                    queue.append((i, j))
+        return new_mat
+
+
+# @lc code=start
+
+
+class Solution:
+    def updateMatrix(self, mat):
+        row_size = len(mat)
+        col_size = len(mat[0])
+        new_mat = [[0] * col_size for i in range(row_size)]
+        queue = deque()
+        for i in range(row_size):
+            for j in range(col_size):
+                if mat[i][j] == 0:
+                    queue.append((i, j))
+
+        while queue:
+            row, col = queue.popleft()
+            for i, j in [
+                (row + 1, col),
+                (row - 1, col),
+                (row, col + 1),
+                (row, col - 1),
+            ]:
+                if 0 <= i < row_size and 0 <= j < col_size and mat[i][j] != 0:
                     mat[i][j] = 0
                     new_mat[i][j] = new_mat[row][col] + 1
                     queue.append((i, j))
