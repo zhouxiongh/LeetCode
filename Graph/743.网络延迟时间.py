@@ -32,7 +32,6 @@ class Solution:
         max_dist = max(dist[1:])
         return -1 if max_dist == MAX_TIME else max_dist
 
-# @lc code=start
 class Solution:
     def networkDelayTime(self, times, n, k):
         MAX_TIME = 101 * 100
@@ -44,4 +43,17 @@ class Solution:
                 dist[v-1] = min(dist[u-1] + w, dist[v-1])
         max_dist = max(dist)
         return -1 if max_dist == MAX_TIME else max_dist
+
+# @lc code=start
+class Solution:
+    def networkDelayTime(self, times, n, k):
+        MAX_TIME = 101 * 100
+        dist = [MAX_TIME] * n
+        # start at k
+        dist[k-1] = 0
+
+        for i in range(1, n):
+            for u, v, w in times:
+                dist[v-1] = min(dist[v-1], dist[u-1] + w)
+        return -1 if max(dist) == MAX_TIME else max(dist)
 # @lc code=end
