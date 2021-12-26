@@ -4,7 +4,6 @@
 # [34] 在排序数组中查找元素的第一个和最后一个位置
 #
 
-# @lc code=start
 class Solution:
     def searchRange(self, nums: List[int], target: int) -> List[int]:
         def first_pos(nums, target):
@@ -41,7 +40,6 @@ class Solution:
             return l
         return [first_pos(nums, target), last_pos(nums, target)]
 
-# @lc code=end
 
 class Solution:
     def searchRange(self, nums: List[int], target: int) -> List[int]:
@@ -51,18 +49,18 @@ class Solution:
             while lo < hi:
                 mid = lo + (hi-lo) // 2
                 if nums[mid] >= target:
-                    hi = mid - 1
+                    hi = mid
                 else:
-                    lo = mid
-            hi += 1
-            if hi == len(nums) or nums[hi] != target:
+                    lo = mid + 1
+            if lo == len(nums) or nums[lo] != target:
                 return -1
-            return hi
+            return lo
+
         def last_pos(nums, target):
             lo = 0
             hi = len(nums)
             while lo < hi:
-                mid = lo + (hi-lo) // 2
+                mid = lo + (hi - lo) // 2
                 if nums[mid] <= target:
                     lo = mid + 1
                 else:
@@ -71,4 +69,7 @@ class Solution:
             if lo < 0 or nums[lo] != target:
                 return -1
             return lo
+
+
         return [first_pos(nums, target), last_pos(nums, target)]
+# @lc code=end
