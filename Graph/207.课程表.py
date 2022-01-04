@@ -70,7 +70,6 @@ class Solution:
         return True
 
 
-# @lc code=start
 class Solution:
     UNVISITED = 0
     VISITED = 1
@@ -96,6 +95,37 @@ class Solution:
         
         for i in range(numCourses):
             if not visited[i]:
+                if dfs(i):
+                    return False
+        return True
+
+# @lc code=start
+class Solution:
+    UNVISITED = 0
+    VISITING = 1
+    VISITED = 2
+
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]):
+        def dfs(course_num: int):
+            status[course_num] = self.VISITING
+            for pre in courses[course_num]:
+                if status[pre] == self.VISITED:
+                    continue
+                if status[pre] == self.VISITING:
+                    return True
+                if dfs(pre):
+                    return True
+            status[course_num] = self.VISITED
+            return False
+
+
+        courses = defaultdict(list)
+        for course, pre in prerequisites:
+            courses[course].append(pre)
+
+        status = [self.UNVISITED] * numCourses
+        for i in range(numCourses):
+            if not status[i]:
                 if dfs(i):
                     return False
         return True
