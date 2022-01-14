@@ -75,26 +75,28 @@ class Solution:
         def divide(x, y, visited):
             if x == y:
                 return 1.0
+            # x / y = x / n * n / y
             visited.add(x)
             for n in graph[x]:
                 if n in visited:
                     continue
-                visited.add(n)
                 ndy = divide(n, y, visited)
                 if ndy > 0:
-                    return ndy * graph[x][n]
+                    return graph[x][n] * ndy
             return -1.0
         graph = defaultdict(dict)
+
         for (x, y), v in zip(equations, values):
             graph[x][y] = v
             graph[y][x] = 1.0 / v
         
-        ans = []
-        for q_x, q_y in queries:
-            if q_x in graph and q_y in graph:
-                ans.append(divide(q_x, q_y, set()))
+        ans = list()
+        for x, y in queries:
+            if x in graph and y in graph:
+                ans.append(divide(x, y, set()))
             else:
                 ans.append(-1.0)
         return ans
+
 
 # @lc code=end
