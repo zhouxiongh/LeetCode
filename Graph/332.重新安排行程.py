@@ -91,15 +91,14 @@ class Solution:
                 dest = heapq.heappop(trips[start])
                 visit(dest)
             ans.append(start)
-
-        ans = []
         trips = defaultdict(list)
         for ticket in tickets:
             trips[ticket[0]].append(ticket[1])
+        
         for trip in trips:
             heapq.heapify(trips[trip])
-        visit("JFK")
+        ans = []
+        visit('JFK')
         return ans[::-1]
-
 
 # @lc code=end
