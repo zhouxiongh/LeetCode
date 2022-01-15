@@ -7,11 +7,11 @@
 # @lc code=start
 class Solution:
     def grayCode(self, n: int) -> List[int]:
-        """ Gray(i) = i ^ (i/2) """
-        num = 1 << n
-        ans = [0] * num
-        for i in range(num):
-            ans[i] = (i >> 1) ^ i
+        s = 2 << (n-1)
+        ans = [i for i in range(s)]
+        for i in range(s):
+            ans[i] = i // 2 ^ i
         return ans
+
 # @lc code=end
 
