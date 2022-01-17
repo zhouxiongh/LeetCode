@@ -34,12 +34,11 @@ print(Solution().findJudge(n, trust))
 class Solution:
     def findJudge(self, n: int, trust: List[List[int]]) -> int:
         degrees = [1] * (n+1)
-        for u, v in trust:
-            degrees[v] += 1
-            degrees[u] -= 1
-        for i in range(1, n+1):
+        for a, b in trust:
+            degrees[a] -= 1
+            degrees[b] += 1
+        for i in range(1, len(degrees)):
             if degrees[i] == n:
                 return i
         return -1
-
 # @lc code=end
