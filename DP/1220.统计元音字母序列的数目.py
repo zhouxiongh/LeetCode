@@ -7,10 +7,11 @@
 # @lc code=start
 class Solution:
     def countVowelPermutation(self, n: int) -> int:
-        a=e=i=o=u=1
+        a, e, i, o, u = 1, 1, 1, 1, 1
         M = 10 ** 9 + 7
         for _ in range(n-1):
-            a, e, i, o, u = (e+i+u) % M, (a+i) % M, (e+o) % M, i%M, (i+o)%M
+            a, e, i, o, u = (e + i + u) % M, (a + i) % M, (e + o) % M, i % M, (i + o) % M
         return sum([a, e, i, o, u]) % M
+
 # @lc code=end
 
