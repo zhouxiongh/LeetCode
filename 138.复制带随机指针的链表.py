@@ -17,14 +17,12 @@ class Node:
 class Solution:
     cached_node = {}
     def copyRandomList(self, head: 'Node') -> 'Node':
-        if head is None:
+        if not head:
             return head
         if head not in self.cached_node:
-            new_head = Node(head.val)
-            self.cached_node[head] = new_head
-            new_head.next = self.copyRandomList(head.next)
-            new_head.random = self.copyRandomList(head.random)
+            self.cached_node[head] = Node(head.val)
+            self.cached_node[head].next = self.copyRandomList(head.next)
+            self.cached_node[head].random = self.copyRandomList(head.random)
         return self.cached_node[head]
-        
 # @lc code=end
 
