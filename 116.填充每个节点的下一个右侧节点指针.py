@@ -17,18 +17,20 @@ class Node:
 
 class Solution:
     def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
-        def next_nodes(pre_nodes):
+        def next_level_nodes(cur_level_nodes):
             nodes = []
-            for node in pre_nodes:
+            for node in cur_level_nodes:
                 nodes.append(node.left)
                 nodes.append(node.right)
             return nodes
+
+        
         nodes = [root]
         while nodes[0] and nodes[0].left:
-            nodes = next_nodes(nodes)
-            for i in range(len(nodes)-1):
-                nodes[i].next = nodes[i+1]
+            nodes = next_level_nodes(nodes)
+            for i in range(1, len(nodes)):
+                nodes[i-1].next = nodes[i]
         return root
-        
+            
 # @lc code=end
 
