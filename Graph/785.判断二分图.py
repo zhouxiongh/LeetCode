@@ -77,23 +77,25 @@ class Solution:
 
 # @lc code=start
 class Solution:
+    RED = 1
+    BLUE = -1
     def isBipartite(self, graph):
-        def dfs(node, color):
+        def coloring(node, color):
+            """ return False if conflict """
             if colors[node]:
                 return colors[node] == color
             colors[node] = color
-            for neighbor in graph[node]:
-                if not dfs(neighbor, -color):
+            for n in graph[node]:
+                if not coloring(n, -color):
                     return False
             return True
 
         n = len(graph)
-        colors = [0] * n
-        RED = 1
-        GREEN = -1
+        colors = [None] * n
+
         for i in range(n):
             if not colors[i]:
-                if not dfs(i, RED):
+                if not coloring(i, self.RED):
                     return False
         return True
 
